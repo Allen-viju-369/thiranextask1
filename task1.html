@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Jane Doe | Senior Frontend Engineer & UI Designer Portfolio</title>
+    <meta name="description" content="Professional single-page semantic portfolio of Jane Doe, a Senior Frontend Engineer specializing in accessible web development and WCAG guidelines.">
+    <meta name="keywords" content="Frontend Engineer, Web Developer, Accessibility Specialist, Semantic HTML, Portfolio, WCAG">
+    <meta name="author" content="Jane Doe">
+
+    <style>
+        /* Color Matrix Variables Configured for Strict WCAG AAA Contrast Compliance */
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-primary: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --focus-ring: #f59e0b;
+        }
+
+        /* Base Body Resets */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Skip to Content Utility Link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 20px;
+            background: var(--focus-ring);
+            color: #000;
+            padding: 10px 20px;
+            font-weight: bold;
+            z-index: 9999;
+            border-radius: 4px;
+            transition: top 0.2s ease;
+        }
+
+        .skip-link:focus {
+            top: 20px;
+            outline: 3px solid var(--text-primary);
+        }
+
+        /* Global Navigation Header */
+        .global-header {
+            background-color: var(--bg-secondary);
+            border-bottom: 2px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 800;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: color 0.2s;
+        }
+
+        .nav-links button:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links button.active {
+            color: var(--accent);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        /* Focus Indicator Rules across Interactive Nodes */
+        button:focus, a:focus, input:focus, textarea:focus {
+            outline: 3px dashed var(--focus-ring);
+            outline-offset: 4px;
+        }
+
+        /* Layout Framework View Management */
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Section Layouts */
+        .hero-section {
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtext {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #0f172a;
+            padding: 12px 28px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .grid-layout, .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .bio-card, .project-card {
+            background-color: var(--bg-secondary);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            font-size: 0.8rem;
+            background-color: #475569;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--accent);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Form styling Controls */
+        .form-wrapper {
+            max-width: 600px;
+        }
+
+        .accessible-form {
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            background-color: var(--bg-primary);
+            border: 2px solid #334155;
+            color: var(--text-primary);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-helper-text {
+            display: block;
+            margin-top: 6px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .submit-button {
+            background-color: var(--accent);
+            color: #0f172a;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Footer Section Styling */
+        .global-footer {
+            background-color: var(--bg-secondary);
+            border-top: 2px solid #334155;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .social-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-nav a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="global-header">
+        <div class="header-container">
+            <div class="logo">
+                <button onclick="navigateTo('about-view')" aria-label="Jane Doe Portfolio Home">JD.</button>
+            </div>
+            <nav aria-label="Main Site Navigation">
+                <ul class="nav-links">
+                    <li><button id="nav-about" class="active" onclick="navigateTo('about-view')" aria-current="page">About</button></li>
+                    <li><button id="nav-projects" onclick="navigateTo('projects-view')">Projects</button></li>
+                    <li><button id="nav-contact" onclick="navigateTo('contact-view')">Contact</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        
+        <div id="about-view" class="page-view active-view">
+            <section class="hero-section" aria-labelledby="hero-heading">
+                <div class="container">
+                    <h1 id="hero-heading">Building Inclusive Digital Experiences</h1>
+                    <p class="hero-subtext">I am a digital architect focused on creating fast, semantic, and highly accessible websites matching strict WCAG compliance standards.</p>
+                    <button onclick="navigateTo('projects-view')" class="cta-button" aria-label="View my engineering projects">Explore My Work</button>
+                </div>
+            </section>
+
+            <section class="about-section" aria-labelledby="about-heading">
+                <div class="container">
+                    <h2 id="about-heading">About My Engineering Philosophy</h2>
+                    <div class="grid-layout">
+                        <article class="bio-card">
+                            <h3>Accessibility-First Development</h3>
+                            <p>Web accessibility isn't a feature; it's a fundamental human right. I build systems that serve every user perfectly, regardless of how they navigate—be it via a mouse, keyboard, or screen reader.</p>
+                        </article>
+                        
+                        <article class="bio-card">
+                            <h3>Clean Semantic Architecture</h3>
+                            <p>By leveraging native HTML5 landmarks and structural elements, my applications preserve structural layout meaning across all platforms, optimizing the interface automatically for SEO and automated parsers.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="projects-view" class="page-view" aria-hidden="true">
+            <section class="portfolio-section" aria-labelledby="portfolio-heading">
+                <div class="container">
+                    <h1 id="portfolio-heading">Featured Engineering Projects</h1>
+                    
+                    <div class="projects-grid">
+                        <article class="project-card" aria-labelledby="proj1-title">
+                            <header class="project-header">
+                                <h2 id="proj1-title">E-Commerce Core Engine</h2>
+                                <span class="tech-tag">HTML5 / ARIA / JavaScript</span>
+                            </header>
+                            <p>A completely keyboard-navigable checkout application featuring screen-reader live alerts for cart mutations and state changes.</p>
+                            <a href="https://github.com" class="project-link" aria-label="View source code for E-Commerce Core Engine on GitHub">View Repository</a>
+                        </article>
+
+                        <article class="project-card" aria-labelledby="proj2-title">
+                            <header class="project-header">
+                                <h2 id="proj2-title">Accessible Analytics Workspace</h2>
+                                <span class="tech-tag">SVG Data / Semantics / CSS</span>
+                            </header>
+                            <p>A data tracking interface visualizing intricate matrices through data-tables, screen-readable alternative descriptions, and accessible color matrix fallback configurations.</p>
+                            <a href="https://github.com" class="project-link" aria-label="View source code for Accessible Analytics Workspace on GitHub">View Repository</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="contact-view" class="page-view" aria-hidden="true">
+            <section class="contact-section" aria-labelledby="contact-heading">
+                <div class="container form-wrapper">
+                    <h1 id="contact-heading">Let's Discuss Your Next Venture</h1>
+                    <p>Fill out the fully accessible form below. All inputs maintain native keyboard focus indicators and assistive reading instructions.</p>
+
+                    <form action="#" method="POST" class="accessible-form" onsubmit="event.preventDefault(); alert('Form submitted accessibly!');">
+                        <div class="form-group">
+                            <label class="form-label" for="username">Full Name <span aria-hidden="true">*</span></label>
+                            <input class="form-input" type="text" id="username" name="username" required aria-required="true" autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address <span aria-hidden="true">*</span></label>
+                            <input class="form-input" type="email" id="email" name="email" required aria-required="true" autocomplete="email" aria-describedby="email-help">
+                            <small id="email-help" class="form-helper-text">Your email address remains private and is only used to respond directly to your request.</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Project Description / Message <span aria-hidden="true">*</span></label>
+                            <textarea class="form-textarea" id="message" name="message" rows="6" required aria-required="true"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-button" aria-label="Submit contact request form">Transmit Message</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="global-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 Jane Doe. Built strictly with semantic HTML5 and WCAG structural patterns.</p>
+            <nav aria-label="Social Media Profile Links" class="social-nav">
+                <ul>
+                    <li><a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub Profile (Opens in new tab)">GitHub</a></li>
+                    <li><a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn Profile (Opens in new tab)">LinkedIn</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        function navigateTo(viewId) {
+            // Hide all views globally and flag them as hidden to screen readers
+            const views = document.querySelectorAll('.page-view');
+            views.forEach(view => {
+                view.classList.remove('active-view');
+                view.setAttribute('aria-hidden', 'true');
+            });
+
+            // Make the targeted view active
+            const targetView = document.getElementById(viewId);
+            targetView.classList.add('active-view');
+            targetView.removeAttribute('aria-hidden');
+
+            // Manage navbar button active layouts and aria-current updates
+            const navButtons = document.querySelectorAll('.nav-links button');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.removeAttribute('aria-current');
+            });
+
+            // Map views back to matching nav item indicators
+            if (viewId === 'about-view') {
+                document.getElementById('nav-about').classList.add('active');
+                document.getElementById('nav-about').setAttribute('aria-current', 'page');
+            } else if (viewId === 'projects-view') {
+                document.getElementById('nav-projects').classList.add('active');
+                document.getElementById('nav-projects').setAttribute('aria-current', 'page');
+            } else if (viewId === 'contact-view') {
+                document.getElementById('nav-contact').classList.add('active');
+                document.getElementById('nav-contact').setAttribute('aria-current', 'page');
+            }
+
+            // Move user keyboard focus directly to main container seamlessly
+            document.getElementById('main-content').focus();
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
